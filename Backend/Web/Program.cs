@@ -8,6 +8,12 @@ using Data.Interfaces;
 using Data.Implements.RolData;
 using Data.Implements.RolUserData;
 using Data.Implements.UserDate;
+using Data.Implements.ServiceData;
+using Data.Implements.MembershipData;
+using Data.Implements.PaymentData;
+using Data.Implements.AttendanceData;
+using Data.Implements.ProfitReportData;
+using Data.Implements.NotificationData;
 using Business.Interfaces;
 using Business.Implements;
 using Utilities.Interfaces;
@@ -69,6 +75,30 @@ builder.Services.AddScoped<IJwtService, JwtService>();
 // Register RoleUser-specific services
 builder.Services.AddScoped<IRolUserData, RolUserData>();
 builder.Services.AddScoped<IRoleUserBusiness, RoleUserBusiness>();
+
+// Register Service-specific services
+builder.Services.AddScoped<IServiceData, ServiceData>();
+builder.Services.AddScoped<IServiceBusiness, ServiceBusiness>();
+
+// Register Membership-specific services
+builder.Services.AddScoped<IMembershipData, MembershipData>();
+builder.Services.AddScoped<IMembershipBusiness, MembershipBusiness>();
+
+// Register Payment-specific services
+builder.Services.AddScoped<IPaymentData, PaymentData>();
+builder.Services.AddScoped<IPaymentBusiness, PaymentBusiness>();
+
+// Register Attendance-specific services
+builder.Services.AddScoped<IAttendanceData, AttendanceData>();
+builder.Services.AddScoped<IAttendanceBusiness, AttendanceBusiness>();
+
+// Register ProfitReport-specific services
+builder.Services.AddScoped<IProfitReportData, ProfitReportData>();
+builder.Services.AddScoped<IProfitReportBusiness, ProfitReportBusiness>();
+
+// Register Notification-specific services
+builder.Services.AddScoped<INotificationData, NotificationData>();
+builder.Services.AddScoped<INotificationBusiness, NotificationBusiness>();
 
 // Register utility helpers
 builder.Services.AddScoped<IGenericIHelpers, GenericHelpers>();

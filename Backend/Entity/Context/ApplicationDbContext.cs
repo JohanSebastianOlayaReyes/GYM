@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 using Entity.Model;
 using Entity.Model.Base;
+using Gym;
 
 using System.Data;
 using Dapper;
@@ -27,6 +28,12 @@ namespace Entity.Context
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Permission> Permissions { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<Membership> Memberships { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
+        public DbSet<ProfitReport> ProfitReports { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configuración de la relación muchos-a-muchos
@@ -43,6 +50,46 @@ namespace Entity.Context
                 .HasOne(ru => ru.Role)
                 .WithMany(r => r.Users)
                 .HasForeignKey(ru => ru.RoleId);
+
+            // Configuración de relaciones para Membership
+            modelBuilder.Entity<Membership>()
+                .HasOne(m => m.User)
+                .WithMany(u => u.Memberships)
+                .HasForeignKey(m => m.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Membership>()
+                .HasOne(m => m.Service)
+                .WithMany(s => s.Memberships)
+                .HasForeignKey(m => m.ServiceId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Configuración de relaciones para Payment
+            modelBuilder.Entity<Payment>()
+                .HasOne(p => p.User)
+                .WithMany(u => u.Payments)
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Payment>()
+                .HasOne(p => p.Membership)
+                .WithMany(m => m.Payments)
+                .HasForeignKey(p => p.MembershipId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Configuración de relaciones para Attendance
+            modelBuilder.Entity<Attendance>()
+                .HasOne(a => a.User)
+                .WithMany(u => u.Attendances)
+                .HasForeignKey(a => a.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Configuración de relaciones para Notification
+            modelBuilder.Entity<Notification>()
+                .HasOne(n => n.User)
+                .WithMany(u => u.Notifications)
+                .HasForeignKey(n => n.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Configuración para todas las entidades que heredan de BaseEntity
             foreach (var entityType in modelBuilder.Model.GetEntityTypes()
