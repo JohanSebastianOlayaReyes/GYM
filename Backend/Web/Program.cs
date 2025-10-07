@@ -14,6 +14,7 @@ using Data.Implements.PaymentData;
 using Data.Implements.AttendanceData;
 using Data.Implements.ProfitReportData;
 using Data.Implements.NotificationData;
+using Data.Implements.AdminData;
 using Business.Interfaces;
 using Business.Implements;
 using Utilities.Interfaces;
@@ -60,6 +61,10 @@ builder.Services.AddScoped<IJwtGenerator, GenerateTokenJwt>();
 builder.Services.AddScoped(typeof(IBaseModelData<>), typeof(BaseModelData<>));
 
 builder.Services.AddScoped(typeof(IBaseBusiness<,>), typeof(BaseBusiness<,>));
+
+// Register Admin-specific services
+builder.Services.AddScoped<IAdminData, AdminData>();
+builder.Services.AddScoped<IAdminBusiness, AdminBusiness>();
 
 // Register User-specific services
 builder.Services.AddScoped<IUserData, UserData>();
