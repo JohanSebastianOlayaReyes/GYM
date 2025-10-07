@@ -1,6 +1,6 @@
 using AutoMapper;
-using Entity.Dtos.ProfitReportDTO;
 using Gym;
+using Entity.Dtos.ProfitReportDTO;
 
 namespace Utilities.Mappers.Profiles
 {

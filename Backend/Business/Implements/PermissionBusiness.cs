@@ -51,7 +51,7 @@ namespace Business.Implements
         ///<summary>
         /// Desactiva un Permission en la base de datos
         /// </summary>
-        public async Task<bool> DeleteLogicPermissionAsync(DeleteLogiPermissionDto dto)
+        public async Task<bool> DeleteLogicPermissionAsync(DeleteLogicalPermissionDto dto)
         {
             if (dto == null || dto.Id <= 0)
                 throw new ValidationException("Id", "El ID del permiso es inválido");

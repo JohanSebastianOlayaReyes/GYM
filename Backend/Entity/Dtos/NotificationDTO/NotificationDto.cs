@@ -1,6 +1,6 @@
 using Entity.Dtos.Base;
 
-namespace Gym;
+namespace Entity.Dtos.NotificationDTO;
 
 /// <summary>
 /// DTO para representar la información de una notificación enviada a los usuarios.

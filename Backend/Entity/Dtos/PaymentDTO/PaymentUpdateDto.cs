@@ -1,6 +1,6 @@
 using Entity.Dtos.Base;
 
-namespace Gym;
+namespace Entity.Dtos.PaymentDTO;
 
 /// <summary>
 /// DTO utilizado para actualizar la información de un pago existente

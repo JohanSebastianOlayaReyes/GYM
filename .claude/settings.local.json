@@ -5,7 +5,19 @@
       "Bash(npm create:*)",
       "Bash(mkdir:*)",
       "Bash(npm install)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(dotnet ef migrations add:*)",
+      "Bash(for:*)",
+      "Bash(do mv \"$file\" \"$file.bak\")",
+      "Bash(done)",
+      "Bash(find:*)",
+      "Bash(Select-String -Pattern \"error CS\")",
+      "Bash(dotnet clean:*)",
+      "Bash(dotnet new:*)",
+      "Bash(dotnet add reference:*)",
+      "Bash(dotnet add package:*)",
+      "Bash(dotnet ef database update:*)",
+      "Bash(dotnet ef dbcontext:*)"
     ],
     "deny": [],
     "ask": []

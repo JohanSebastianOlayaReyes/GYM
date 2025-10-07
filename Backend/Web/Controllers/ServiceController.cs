@@ -1,4 +1,5 @@
 using Business.Interfaces;
+using Entity.Dtos.ServiceDTO;
 using Gym;
 using Microsoft.AspNetCore.Mvc;
 
@@ -128,8 +129,8 @@ namespace Web.Controllers
                 serviceDto.Id = id;
                 var result = await _serviceBusiness.UpdateAsync(serviceDto);
 
-                if (result)
-                    return Ok(new { success = true, message = "Servicio actualizado exitosamente" });
+                if (result != null)
+                    return Ok(new { success = true, message = "Servicio actualizado exitosamente", data = result });
 
                 return BadRequest(new { success = false, message = "No se pudo actualizar el servicio" });
             }
@@ -149,8 +150,7 @@ namespace Web.Controllers
         {
             try
             {
-                var deleteDto = new DeleteLogicalServiceDto { Id = id, Status = false };
-                var result = await _serviceBusiness.DeleteAsync(deleteDto);
+                var result = await _serviceBusiness.DeleteAsync(id);
 
                 if (result)
                     return Ok(new { success = true, message = "Servicio eliminado exitosamente" });

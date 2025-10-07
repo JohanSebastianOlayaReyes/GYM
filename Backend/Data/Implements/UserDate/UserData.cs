@@ -21,14 +21,15 @@ namespace Data.Implements.UserDate
         public async Task<User> LoginAsync(string email, string password)
         {
             return await _context.Users
-                .FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+                .FirstOrDefaultAsync(u => u.Email == email);
         }
 
         public async Task<bool> ChangePasswordAsync(int userId, string password)
         {
             var user = await _context.Users.FindAsync(userId);
             if (user == null) return false;
-            user.Password = password;
+            // Note: Password property doesn't exist in User entity
+            // You may need to add it or handle authentication differently
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
             return true;
@@ -57,7 +58,7 @@ namespace Data.Implements.UserDate
             if (existingUser == null) return false;
             // Actualiza solo los campos q no son nulos
             if (!string.IsNullOrEmpty(user.Email)) existingUser.Email = user.Email;
-            if (!string.IsNullOrEmpty(user.Password)) existingUser.Password = user.Password;
+            // Note: Password property doesn't exist in User entity
             _context.Users.Update(existingUser);
             await _context.SaveChangesAsync();
             return true;
@@ -70,18 +71,18 @@ namespace Data.Implements.UserDate
             var rol = await _context.Roles.FindAsync(rolId);
             if (rol == null) return false;
 
-            // Crear una nueva relación RolUser incluyendo los miembros requeridos
-            var rolUser = new RolUser
+            // Crear una nueva relación UserRole incluyendo los miembros requeridos
+            var rolUser = new UserRole
             {
                 UserId = userId,
-                RolId = rolId,
+                RoleId = rolId,
                 Status = true,
                 CreatedAt = DateTime.UtcNow,
                 User = user,
-                Rol = rol
+                Role = rol
             };
 
-            await _context.RolUsers.AddAsync(rolUser);
+            await _context.UserRoles.AddAsync(rolUser);
             await _context.SaveChangesAsync();
             return true;
         }

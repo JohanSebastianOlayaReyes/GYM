@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Data.Implements.RolData
 {
-    public class RolData : BaseModelData<Rol> , IRolData
+    public class RolData : BaseModelData<Role> , IRolData
     {
         public RolData(ApplicationDbContext context) : base(context)
         {
@@ -18,7 +18,7 @@ namespace Data.Implements.RolData
 
         public async Task<bool> ActiveAsync(int id, bool active)
         {
-            var user = await _context.Set<Rol>().FindAsync(id);
+            var user = await _context.Set<Role>().FindAsync(id);
             if (user == null)
                 return false;
 
@@ -29,7 +29,7 @@ namespace Data.Implements.RolData
             return true;
         }
 
-        public async Task<bool> UpdatePartial(Rol rol)
+        public async Task<bool> UpdatePartial(Role rol)
         {
             var existingRol = await _context.Roles.FindAsync(rol.Id);
             if (existingRol == null) return false;

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Entity.Dtos.AuthDTO;
-using Entity.Dtos.CredencialesDTO;
+using Entity.Dtos.AuthDTO;
 
 namespace Business.Interfaces
 {

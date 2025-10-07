@@ -111,7 +111,7 @@ namespace Data.Implements.NotificationData
             foreach (var notification in oldNotifications)
             {
                 notification.Status = false;
-                notification.DeletedAt = DateTime.UtcNow;
+                notification.DeleteAt = DateTime.UtcNow;
                 await UpdateAsync(notification);
             }
 

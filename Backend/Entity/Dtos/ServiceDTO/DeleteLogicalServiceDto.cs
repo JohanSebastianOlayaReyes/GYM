@@ -1,6 +1,6 @@
 using Entity.Dtos.Base;
 
-namespace Gym;
+namespace Entity.Dtos.ServiceDTO;
 
 /// <summary>
 /// DTO utilizado para realizar la eliminación lógica de un servicio.

@@ -1,6 +1,6 @@
 using AutoMapper;
-using Entity.Dtos.PaymentDTO;
 using Gym;
+using Entity.Dtos.PaymentDTO;
 
 namespace Utilities.Mappers.Profiles
 {

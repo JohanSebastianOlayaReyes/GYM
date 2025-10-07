@@ -63,7 +63,7 @@ namespace Business.Implements
                 return null;
 
             string hashedPassword = HashPassword(password);
-            return user.Password == hashedPassword ? user : null;
+            return user.PasswordHash == hashedPassword ? user : null;
         }
 
         public async Task<bool> ValidateCredentialsAsync(string email, string password)
@@ -99,7 +99,7 @@ namespace Business.Implements
         public async override Task<UserDto> CreateAsync(UserDto dto)
         {
             var user = _mapper.Map<User>(dto);
-            user.Password = HashPassword(user.Password);
+            user.PasswordHash = HashPassword(user.PasswordHash ?? "");
             user.Status = true;
             user.CreatedAt = DateTime.Now;
 
@@ -153,7 +153,7 @@ namespace Business.Implements
             // Aquí puedes hacer validaciones si es necesario
 
             // Llamada al Data con los datos extraídos del DTO
-            return await _userData.ChangePasswordAsync(dto.Id, dto.Password);
+            return await _userData.ChangePasswordAsync(dto.Id, dto.NewPassword);
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace Business.Implements
         public async Task<bool> AssignRolAsync(AssignUserRolDto dto)
         {
             // Aquí puedes hacer validaciones si deseas
-            return await _userData.AssingRolAsync(dto.UserId, dto.RolId);
+            return await _userData.AssingRolAsync(dto.UserId, dto.RoleId);
         }
 
 

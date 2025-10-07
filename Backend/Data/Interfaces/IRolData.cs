@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Data.Interfaces
 {
-    public interface IRolData : IBaseModelData<Rol>
+    public interface IRolData : IBaseModelData<Role>
     {
         Task<bool> ActiveAsync(int id, bool status);
-        Task<bool> UpdatePartial(Rol rol);
+        Task<bool> UpdatePartial(Role role);
     }
 }

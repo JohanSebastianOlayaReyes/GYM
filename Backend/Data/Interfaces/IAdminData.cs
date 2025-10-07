@@ -22,5 +22,6 @@ namespace Data.Interfaces
         /// Verifica si existe un administrador con el email proporcionado.
         /// </summary>
         Task<bool> ExistsByEmailAsync(string email);
+        Task SaveAsync(Admin admin);
     }
 }

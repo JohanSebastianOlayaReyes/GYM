@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Data.Interfaces
 {
-    public interface IRolUserData : IBaseModelData<RolUser>
+    public interface IRolUserData : IBaseModelData<UserRole>
     {
-        Task<bool> UpdatePartial(RolUser rolUser);
+        Task<bool> UpdatePartial(UserRole rolUser);
     }
 }

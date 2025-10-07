@@ -19,7 +19,7 @@ namespace Business.Implements
     /// Contiene la lógica de negocio de los métodos específicos para la entidad RolUser.
     /// Extiende BaseBusiness heredando la lógica de negocio de los métodos base.
     /// </summary>
-    public class RoleUserBusiness : BaseBusiness<RolUser, RolUserDto>, IRoleUserBusiness
+    public class RoleUserBusiness : BaseBusiness<UserRole, UserRoleDto>, IRoleUserBusiness
     {
         /// <summary>
         /// Proporciona acceso a los métodos de la capa de datos de roles de usuario.
@@ -52,15 +52,15 @@ namespace Business.Implements
         /// Se lanza cuando el ID del rol de usuario es inválido o cuando no se proporciona
         /// ningún campo para actualizar.
         /// </exception>
-        public async Task<bool> UpdateParcialRoleUserAsync(UpdateRolUserDto dto)
+        public async Task<bool> UpdateParcialRoleUserAsync(UpdateUserRoleDto dto)
         {
             if (dto.Id <= 0)
                 throw new ArgumentException("ID inválido.");
 
-            if (dto.RolId <= 0 && dto.UserId <= 0)
+            if (dto.RoleId <= 0 && dto.UserId <= 0)
                 throw new ArgumentException("Debe enviar al menos un campo para actualizar.");
 
-            var rolUser = _mapper.Map<RolUser>(dto);
+            var rolUser = _mapper.Map<UserRole>(dto);
             var result = await _rolUserData.UpdatePartial(rolUser);
             return result;
         }

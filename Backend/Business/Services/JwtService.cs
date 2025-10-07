@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Entity.Dtos.AuthDTO;
+using Entity.Dtos.UserDTO;
 using Entity.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -14,7 +15,7 @@ using Utilities.Interfaces;
 namespace Business.Services
 {
     /// <summary>
-    /// Implementaci髇 del servicio JWT para la capa de negocio.
+    /// Implementaci贸n del servicio JWT para la capa de negocio.
     /// </summary>
     public class JwtService : IJwtService
     {
@@ -25,7 +26,7 @@ namespace Business.Services
         /// Constructor del servicio JWT.
         /// </summary>
         /// <param name="jwtGenerator">Generador de tokens de la capa de utilidades</param>
-        /// <param name="configuration">Configuraci髇 de la aplicaci髇</param>
+        /// <param name="configuration">Configuraci贸n de la aplicaci贸n</param>
         public JwtService(IJwtGenerator jwtGenerator, IConfiguration configuration)
         {
             _jwtGenerator = jwtGenerator;
@@ -33,13 +34,30 @@ namespace Business.Services
         }
 
         /// <summary>
+        /// Genera un token JWT para un UserDto.
+        /// </summary>
+        /// <param name="userDto">DTO del usuario para el cual generar el token</param>
+        /// <returns>DTO con el token y su fecha de expiraci贸n</returns>
+        public async Task<AuthDto> GenerateTokenAsync(UserDto userDto)
+        {
+            // Convertir el UserDto a User entity para generar el token
+            var user = new User
+            {
+                Id = userDto.Id,
+                Email = userDto.Email
+            };
+
+            return await _jwtGenerator.GeneradorToken(user);
+        }
+
+        /// <summary>
         /// Genera un token JWT delegando a la capa de utilidades.
         /// </summary>
         /// <param name="user">Usuario para el cual generar el token</param>
-        /// <returns>DTO con el token y su fecha de expiraci髇</returns>
+        /// <returns>DTO con el token y su fecha de expiraci贸n</returns>
         public async Task<AuthDto> GenerateTokenAsync(User user)
         {
-            // Delegamos la generaci髇 a la capa de utilidades
+            // Delegamos la generaci贸n a la capa de utilidades
             return await _jwtGenerator.GeneradorToken(user);
         }
 
@@ -47,7 +65,7 @@ namespace Business.Services
         /// Valida un token JWT y extrae sus claims.
         /// </summary>
         /// <param name="token">Token JWT a validar</param>
-        /// <returns>ClaimsPrincipal con la informaci髇 del token, o null si es inv醠ido</returns>
+        /// <returns>ClaimsPrincipal con la informaci贸n del token, o null si es inv谩lido</returns>
         public ClaimsPrincipal ValidateToken(string token)
         {
             if (string.IsNullOrEmpty(token))
@@ -58,7 +76,7 @@ namespace Business.Services
 
             try
             {
-                // Configurar los par醡etros de validaci髇
+                // Configurar los par谩metros de validaci贸n
                 var validationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
@@ -82,16 +100,16 @@ namespace Business.Services
             }
             catch
             {
-                // Si hay alguna excepci髇 durante la validaci髇, consideramos el token inv醠ido
+                // Si hay alguna excepci贸n durante la validaci贸n, consideramos el token inv谩lido
                 return null;
             }
         }
 
         /// <summary>
-        /// Verifica si un token es v醠ido sin extraer sus claims.
+        /// Verifica si un token es v谩lido sin extraer sus claims.
         /// </summary>
         /// <param name="token">Token JWT a verificar</param>
-        /// <returns>True si el token es v醠ido; false en caso contrario</returns>
+        /// <returns>True si el token es v谩lido; false en caso contrario</returns>
         public bool IsTokenValid(string token)
         {
             return ValidateToken(token) != null;

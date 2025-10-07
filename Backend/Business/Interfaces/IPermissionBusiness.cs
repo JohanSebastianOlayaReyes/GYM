@@ -23,6 +23,6 @@ namespace Business.Interfaces
         /// </summary>
         /// <param name="dto">DTO con el ID y estado del permiso a desactivar.</param>
         ///<returns>True si el borrado lógico fue exitoso; de lo contrario false</returns>
-        Task<bool> DeleteLogicPermissionAsync(DeleteLogiPermissionDto dto);
+        Task<bool> DeleteLogicPermissionAsync(DeleteLogicalPermissionDto dto);
     }
 }

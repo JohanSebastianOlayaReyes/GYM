@@ -35,6 +35,11 @@ namespace Entity.Model
         public string Email { get; set; }
 
         /// <summary>
+        /// Obtiene o establece el hash de la contraseña del usuario.
+        /// </summary>
+        public string PasswordHash { get; set; }
+
+        /// <summary>
         /// Obtiene o establece la fecha en que el usuario se registró en el sistema.
         /// </summary>
         public DateTime RegistrationDate { get; set; }

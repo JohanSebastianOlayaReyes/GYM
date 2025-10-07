@@ -1,6 +1,6 @@
 using AutoMapper;
-using Entity.Dtos.NotificationDTO;
 using Gym;
+using Entity.Dtos.NotificationDTO;
 
 namespace Utilities.Mappers.Profiles
 {

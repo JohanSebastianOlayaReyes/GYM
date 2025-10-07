@@ -38,8 +38,8 @@ namespace Business.Interfaces
         /// <param name="startDate">Fecha inicial</param>
         /// <param name="endDate">Fecha final</param>
         /// <param name="topCount">Cantidad de usuarios a retornar</param>
-        /// <returns>Diccionario con el ID del usuario como clave y el conteo de asistencias como valor</returns>
-        Task<Dictionary<int, int>> GetTopAttendingUsersAsync(DateTime startDate, DateTime endDate, int topCount);
+        /// <returns>Lista de tuplas con información de usuarios y su conteo de asistencias</returns>
+        Task<IEnumerable<(int UserId, string UserName, int AttendanceCount)>> GetTopAttendingUsersAsync(DateTime startDate, DateTime endDate, int topCount);
 
         /// <summary>
         /// Obtiene el promedio de asistencia diaria para un mes específico

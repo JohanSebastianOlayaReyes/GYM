@@ -1,6 +1,6 @@
 using Entity.Dtos.Base;
 
-namespace Gym;
+namespace Entity.Dtos.ProfitReportDTO;
 
 /// <summary>
 /// DTO para representar un reporte de ganancias del gimnasio.

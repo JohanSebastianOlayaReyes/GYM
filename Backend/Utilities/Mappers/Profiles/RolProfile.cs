@@ -8,8 +8,8 @@ namespace Utilities.Mappers.Profiles
     {
         public RolProfile()
         {
-            // Mapeo de Rol a RolDto y viceversa
-            CreateMap<Rol, RolDto>().ReverseMap();
+            // Mapeo de Role a RoleDto y viceversa
+            CreateMap<Role, RoleDto>().ReverseMap();
         }
     }
 }

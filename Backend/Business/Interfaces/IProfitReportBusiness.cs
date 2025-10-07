@@ -15,8 +15,8 @@ namespace Business.Interfaces
         /// </summary>
         /// <param name="year1">Primer año a comparar</param>
         /// <param name="year2">Segundo año a comparar</param>
-        /// <returns>Diccionario con los reportes de ambos años agrupados por mes</returns>
-        Task<Dictionary<int, (ProfitReportDto Year1, ProfitReportDto Year2)>> GetComparisonByYearAsync(int year1, int year2);
+        /// <returns>Objeto con los datos de comparación de ambos años</returns>
+        Task<object> GetComparisonByYearAsync(int year1, int year2);
 
         /// <summary>
         /// Obtiene el total de ganancias de un año completo

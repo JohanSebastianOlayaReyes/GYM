@@ -71,23 +71,14 @@ namespace Business.Implements
         /// <param name="year1">Primer año a comparar</param>
         /// <param name="year2">Segundo año a comparar</param>
         /// <returns>Diccionario con los reportes de ambos años agrupados por mes</returns>
-        public async Task<Dictionary<int, (ProfitReportDto Year1, ProfitReportDto Year2)>> GetComparisonByYearAsync(int year1, int year2)
+        public async Task<object> GetComparisonByYearAsync(int year1, int year2)
         {
             try
             {
                 var comparison = await _profitReportData.GetComparisonByYearAsync(year1, year2);
 
-                var result = new Dictionary<int, (ProfitReportDto Year1, ProfitReportDto Year2)>();
-
-                foreach (var kvp in comparison)
-                {
-                    result[kvp.Key] = (
-                        _mapper.Map<ProfitReportDto>(kvp.Value.Year1),
-                        _mapper.Map<ProfitReportDto>(kvp.Value.Year2)
-                    );
-                }
-
-                return result;
+                // El método devuelve un objeto dinámico con los datos de comparación
+                return comparison;
             }
             catch (Exception ex)
             {

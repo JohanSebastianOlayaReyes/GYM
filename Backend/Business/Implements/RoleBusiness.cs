@@ -21,7 +21,7 @@ namespace Business.Implements
     /// Contiene la logica de negocio de los metodos especificos para la entidad Rol
     /// Extiende BaseBusiness heredando la logica de negocio de los metodos base 
     /// </summary>
-    public class RolBusiness : BaseBusiness<Rol, RolDto>, IRolBusiness
+    public class RolBusiness : BaseBusiness<Role, RoleDto>, IRoleBusiness
     {
         ///<summary>Proporciona acceso a los metodos de la capa de datos de roles</summary>
         private readonly IRolData _rolData;
@@ -40,13 +40,13 @@ namespace Business.Implements
         ///<summary>
         /// Actualiza parcialmente un rol en la base de datos
         /// </summary>
-        public async Task<bool> UpdatePartialRolAsync(UpdateRolDto dto)
+        public async Task<bool> UpdatePartialRolAsync(UpdateRoleDto dto)
         {
             if (dto.Id <= 0)
                 throw new ArgumentException("ID inválido.");
 
 
-            var rol = _mapper.Map<Rol>(dto);
+            var rol = _mapper.Map<Role>(dto);
 
             var result = await _rolData.UpdatePartial(rol); // esto ya retorna bool
             return result;
@@ -55,7 +55,7 @@ namespace Business.Implements
         ///<summary>
         /// Desactiva un rol en la base de datos
         /// </summary>
-        public async Task<bool> DeleteLogicRolAsync(DeleteLogiRolDto dto)
+        public async Task<bool> DeleteLogicRolAsync(DeleteLogicalRoleDto dto)
         {
             if (dto == null || dto.Id <= 0)
                 throw new ValidationException("Id", "El ID del rol es inválido");

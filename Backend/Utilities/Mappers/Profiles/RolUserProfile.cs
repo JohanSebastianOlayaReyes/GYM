@@ -11,9 +11,9 @@ namespace Utilities.Mappers.Profiles
 {
     public class RolUserProfile : Profile
     {
-        public RolUserProfile() 
+        public RolUserProfile()
         {
-            CreateMap<RolUser, RolUserDto>().ReverseMap();
+            CreateMap<UserRole, UserRoleDto>().ReverseMap();
         } 
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Business.Implements
 {
@@ -45,10 +46,10 @@ namespace Business.Implements
                 GymName = registerDto.GymName,
                 PasswordHash = passwordHash,
                 CreatedAt = DateTime.UtcNow,
-                State = true
+                Status = true
             };
 
-            await _adminData.Save(admin);
+            await _adminData.SaveAsync(admin);
 
             // Generar token
             var token = GenerateJwtToken(admin);

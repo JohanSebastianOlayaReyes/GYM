@@ -5,24 +5,24 @@ using Entity.Model;
 namespace Business.Interfaces
 {
     ///<summary>
-    /// Define los métodos de negocio especifícos para la gestión de roles.
-    /// Hereda operaciones CRUD genéricas de <see cref="IBaseBusiness{Rol, RolDto}"/>.
+    /// Define los mï¿½todos de negocio especifï¿½cos para la gestiï¿½n de roles.
+    /// Hereda operaciones CRUD genï¿½ricas de <see cref="IBaseBusiness{Rol, RolDto}"/>.
     //</summary>
-    public interface IRolBusiness : IBaseBusiness<Rol, RolDto>
+    public interface IRoleBusiness : IBaseBusiness<Role, RoleDto>
     {
 
         /// <summary>
         /// Actualiza parcialmente los datos de un rol.
         /// </summary>
         /// <param name="dto">Objeto que contiene los datos actualizados del rol, como nombre o estado.</param>
-        ///<returns>True si la actualización fue exitosa; de lo contario false</returns>
-        Task<bool> UpdatePartialRolAsync(UpdateRolDto dto);
+        ///<returns>True si la actualizaciï¿½n fue exitosa; de lo contario false</returns>
+        Task<bool> UpdatePartialRolAsync(UpdateRoleDto dto);
 
         /// <summary>
-        /// Realiza un borrado lógico del rol, marcándolo como inactivo en lugar de eliminarlo físicamente.
+        /// Realiza un borrado lï¿½gico del rol, marcï¿½ndolo como inactivo en lugar de eliminarlo fï¿½sicamente.
         /// </summary>
         /// <param name="id">ID del rol a desactivar.</param>
-        ///<returns>True si el borrado lógico fue exitoso; de lo contario false</returns>
-        Task<bool> DeleteLogicRolAsync(DeleteLogiRolDto dto);
+        ///<returns>True si el borrado lï¿½gico fue exitoso; de lo contario false</returns>
+        Task<bool> DeleteLogicRolAsync(DeleteLogicalRoleDto dto);
     }
 }

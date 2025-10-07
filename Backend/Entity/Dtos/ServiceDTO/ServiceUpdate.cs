@@ -1,6 +1,6 @@
 using Entity.Dtos.Base;
 
-namespace Gym;
+namespace Entity.Dtos.ServiceDTO;
 
 /// <summary>
 /// DTO utilizado para actualizar la información de un servicio existente en el gimnasio

@@ -1,6 +1,6 @@
 using Entity.Dtos.Base;
 
-namespace Gym;
+namespace Entity.Dtos.NotificationDTO;
 
 /// <summary>
 /// DTO utilizado para actualizar la información de una notificación existente

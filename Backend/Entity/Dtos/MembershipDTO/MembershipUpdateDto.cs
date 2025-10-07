@@ -1,6 +1,6 @@
 using Entity.Dtos.Base;
 
-namespace Gym;
+namespace Entity.Dtos.MembershipDTO;
 
 /// <summary>
 /// DTO utilizado para actualizar la información de una membresía existente

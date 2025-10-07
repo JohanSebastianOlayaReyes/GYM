@@ -2,14 +2,14 @@ using System;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Entity.Dtos.AuthDTO;
-using Entity.Dtos.CredencialesDTO;
+using Entity.Dtos.UserDTO;
 using Microsoft.Extensions.Logging;
 
 namespace Business.Services
 {
     /// <summary>
-    /// Implementación del servicio de autenticación que gestiona el proceso de login
-    /// y obtención de tokens JWT.
+    /// Implementaciï¿½n del servicio de autenticaciï¿½n que gestiona el proceso de login
+    /// y obtenciï¿½n de tokens JWT.
     /// </summary>
     public class AuthService : IAuthService
     {
@@ -18,10 +18,10 @@ namespace Business.Services
         private readonly ILogger<AuthService> _logger;
 
         /// <summary>
-        /// Inicializa una nueva instancia del servicio de autenticación.
+        /// Inicializa una nueva instancia del servicio de autenticaciï¿½n.
         /// </summary>
         /// <param name="userBusiness">Servicio para operaciones de negocio relacionadas con usuarios.</param>
-        /// <param name="jwtService">Servicio para la generación y validación de tokens JWT.</param>
+        /// <param name="jwtService">Servicio para la generaciï¿½n y validaciï¿½n de tokens JWT.</param>
         /// <param name="logger">Servicio de logging para registrar eventos y errores.</param>
         public AuthService(
             IUserBusiness userBusiness,
@@ -36,10 +36,10 @@ namespace Business.Services
         /// <summary>
         /// Autentica a un usuario utilizando sus credenciales y genera un token JWT.
         /// </summary>
-        /// <param name="credenciales">Credenciales del usuario (email y contraseña).</param>
-        /// <returns>Un objeto AuthDto que contiene el token JWT y su fecha de expiración.</returns>
-        /// <exception cref="UnauthorizedAccessException">Se lanza cuando las credenciales proporcionadas son inválidas.</exception>
-        /// <exception cref="Exception">Se lanza cuando ocurre un error inesperado durante el proceso de autenticación.</exception>
+        /// <param name="credenciales">Credenciales del usuario (email y contraseï¿½a).</param>
+        /// <returns>Un objeto AuthDto que contiene el token JWT y su fecha de expiraciï¿½n.</returns>
+        /// <exception cref="UnauthorizedAccessException">Se lanza cuando las credenciales proporcionadas son invï¿½lidas.</exception>
+        /// <exception cref="Exception">Se lanza cuando ocurre un error inesperado durante el proceso de autenticaciï¿½n.</exception>
         public async Task<AuthDto> LoginAsync(CredencialesDto credenciales)
         {
             try
@@ -47,19 +47,26 @@ namespace Business.Services
                 // Verificar las credenciales del usuario
                 var user = await _userBusiness.LoginAsync(credenciales.Email, credenciales.Password);
 
-                // Si no se encontró el usuario o las credenciales son incorrectas
+                // Si no se encontrï¿½ el usuario o las credenciales son incorrectas
                 if (user == null)
-                    throw new UnauthorizedAccessException("Credenciales inválidas");
+                    throw new UnauthorizedAccessException("Credenciales invï¿½lidas");
+
+                // Convertir User a UserDto para el JWT service
+                var userDto = new UserDto
+                {
+                    Id = user.Id,
+                    Email = user.Email
+                };
 
                 // Generar y devolver el token JWT
-                return await _jwtService.GenerateTokenAsync(user);
+                return await _jwtService.GenerateTokenAsync(userDto);
             }
             catch (Exception ex)
             {
-                // Registrar el error para diagnóstico
+                // Registrar el error para diagnï¿½stico
                 _logger.LogError($"Error durante el login: {ex.Message}");
 
-                // Relanzar la excepción para que se maneje en capas superiores
+                // Relanzar la excepciï¿½n para que se maneje en capas superiores
                 throw;
             }
         }

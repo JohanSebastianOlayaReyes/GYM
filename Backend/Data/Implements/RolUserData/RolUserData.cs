@@ -10,20 +10,20 @@ using System.Threading.Tasks;
 
 namespace Data.Implements.RolUserData;
 
-public class RolUserData : BaseModelData<RolUser>, IRolUserData
+public class RolUserData : BaseModelData<UserRole>, IRolUserData
 {
     public RolUserData(ApplicationDbContext context) : base(context)
     {
     }
 
-    public async Task<bool> UpdatePartial(RolUser rolUser)
+    public async Task<bool> UpdatePartial(UserRole rolUser)
     {
-        var existingRolUser = await _context.RolUsers.FindAsync(rolUser.Id);
+        var existingRolUser = await _context.UserRoles.FindAsync(rolUser.Id);
         if (existingRolUser == null) return false;
         // Update only the fields that are not null
-        if (rolUser.RolId > 0) existingRolUser.RolId = rolUser.RolId;
+        if (rolUser.RoleId > 0) existingRolUser.RoleId = rolUser.RoleId;
         if (rolUser.UserId > 0) existingRolUser.UserId = rolUser.UserId;
-        _context.RolUsers.Update(existingRolUser);
+        _context.UserRoles.Update(existingRolUser);
         await _context.SaveChangesAsync();
         return true;
     }

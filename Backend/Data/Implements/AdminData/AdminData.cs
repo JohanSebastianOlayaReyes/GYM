@@ -21,7 +21,7 @@ namespace Data.Implements.AdminData
         public async Task<Admin> LoginAsync(string email, string password)
         {
             return await _context.Admins
-                .FirstOrDefaultAsync(a => a.Email == email && a.PasswordHash == password && a.State == true);
+                .FirstOrDefaultAsync(a => a.Email == email && a.PasswordHash == password && a.Status == true);
         }
 
         /// <summary>

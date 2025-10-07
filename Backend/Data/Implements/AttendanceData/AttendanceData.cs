@@ -110,7 +110,7 @@ namespace Data.Implements.AttendanceData
         /// </summary>
         public async Task<IEnumerable<(int UserId, string UserName, int AttendanceCount)>> GetTopAttendingUsersAsync(DateTime startDate, DateTime endDate, int topCount)
         {
-            return await _dbSet
+            var result = await _dbSet
                 .Where(a => a.Status && a.Date >= startDate && a.Date <= endDate)
                 .Include(a => a.User)
                 .GroupBy(a => new { a.UserId, UserName = a.User.FirstName + " " + a.User.LastName })
@@ -122,9 +122,9 @@ namespace Data.Implements.AttendanceData
                 })
                 .OrderByDescending(x => x.AttendanceCount)
                 .Take(topCount)
-                .AsEnumerable()
-                .Select(x => (x.UserId, x.UserName, x.AttendanceCount))
-                .ToList();
+                .ToListAsync();
+
+            return result.Select(x => (x.UserId, x.UserName, x.AttendanceCount));
         }
 
         /// <summary>

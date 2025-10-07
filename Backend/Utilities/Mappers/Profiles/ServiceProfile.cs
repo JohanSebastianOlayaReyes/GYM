@@ -1,6 +1,6 @@
 using AutoMapper;
-using Entity.Dtos.ServiceDTO;
 using Gym;
+using Entity.Dtos.ServiceDTO;
 
 namespace Utilities.Mappers.Profiles
 {

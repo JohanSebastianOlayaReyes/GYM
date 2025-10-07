@@ -140,7 +140,7 @@ namespace Business.Implements
         /// <param name="endDate">Fecha final</param>
         /// <param name="topCount">Cantidad de usuarios a retornar</param>
         /// <returns>Diccionario con el ID del usuario como clave y el conteo de asistencias como valor</returns>
-        public async Task<Dictionary<int, int>> GetTopAttendingUsersAsync(DateTime startDate, DateTime endDate, int topCount)
+        public async Task<IEnumerable<(int UserId, string UserName, int AttendanceCount)>> GetTopAttendingUsersAsync(DateTime startDate, DateTime endDate, int topCount)
         {
             try
             {

@@ -1,6 +1,6 @@
 using Entity.Dtos.Base;
 
-namespace Gym;
+namespace Entity.Dtos.PaymentDTO;
 
 /// <summary>
 /// DTO utilizado para realizar la eliminación lógica de un pago.
