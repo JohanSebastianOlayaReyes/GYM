@@ -253,11 +253,19 @@ namespace Web.Controllers
         {
             try
             {
-                updateDto.Id = id;
-                var result = await _attendanceBusiness.UpdateAsync(updateDto);
+                var attendanceDto = new AttendanceDto
+                {
+                    Id = id,
+                    UserId = updateDto.UserId,
+                    Date = updateDto.Date,
+                    Time = updateDto.Time,
+                    RegistrationMethod = updateDto.RegistrationMethod,
+                    Status = updateDto.Status
+                };
+                var result = await _attendanceBusiness.UpdateAsync(attendanceDto);
 
-                if (result)
-                    return Ok(new { success = true, message = "Asistencia actualizada exitosamente" });
+                if (result != null)
+                    return Ok(new { success = true, message = "Asistencia actualizada exitosamente", data = result });
 
                 return BadRequest(new { success = false, message = "No se pudo actualizar la asistencia" });
             }
@@ -277,8 +285,7 @@ namespace Web.Controllers
         {
             try
             {
-                var deleteDto = new DeleteLogicalAttendanceDto { Id = id, Status = false };
-                var result = await _attendanceBusiness.DeleteAsync(deleteDto);
+                var result = await _attendanceBusiness.DeleteAsync(id);
 
                 if (result)
                     return Ok(new { success = true, message = "Asistencia eliminada exitosamente" });

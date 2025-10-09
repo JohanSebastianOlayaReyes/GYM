@@ -4,9 +4,9 @@ using Entity.Model;
 
 namespace Web.Controllers.Interface
 {
-    public interface IRoleController : IGenericController<RolDto, Rol>
+    public interface IRoleController : IGenericController<RoleDto, Role>
     {
-        Task<IActionResult> UpdatePartialRole( int id, int roleId, UpdateRolDto dto);
+        Task<IActionResult> UpdatePartialRole(int id, int roleId, UpdateRoleDto dto);
         Task<IActionResult> DeleteLogicRole(int id);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Entity.Dtos.UserDTO;
 using Entity.Model;
+using Entity.Dtos; // Add this if UserStatusDto is in Entity.Dtos namespace
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers.Interface

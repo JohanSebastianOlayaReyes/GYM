@@ -207,11 +207,21 @@ namespace Web.Controllers
         {
             try
             {
-                updateDto.Id = id;
-                var result = await _paymentBusiness.UpdateAsync(updateDto);
+                var paymentDto = new PaymentDto
+                {
+                    Id = id,
+                    UserId = updateDto.UserId,
+                    MembershipId = updateDto.MembershipId,
+                    Amount = updateDto.Amount,
+                    Method = updateDto.Method,
+                    Date = updateDto.Date,
+                    Reference = updateDto.Reference,
+                    Status = updateDto.Status
+                };
+                var result = await _paymentBusiness.UpdateAsync(paymentDto);
 
-                if (result)
-                    return Ok(new { success = true, message = "Pago actualizado exitosamente" });
+                if (result != null)
+                    return Ok(new { success = true, message = "Pago actualizado exitosamente", data = result });
 
                 return BadRequest(new { success = false, message = "No se pudo actualizar el pago" });
             }
@@ -231,8 +241,7 @@ namespace Web.Controllers
         {
             try
             {
-                var deleteDto = new DeleteLogicalPaymentDto { Id = id, Status = false };
-                var result = await _paymentBusiness.DeleteAsync(deleteDto);
+                var result = await _paymentBusiness.DeleteAsync(id);
 
                 if (result)
                     return Ok(new { success = true, message = "Pago eliminado exitosamente" });

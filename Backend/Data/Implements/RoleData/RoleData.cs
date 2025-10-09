@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Data.Implements.RolData
 {
-    public class RolData : BaseModelData<Role> , IRolData
+    public class RoleData : BaseModelData<Role> , IRolData
     {
-        public RolData(ApplicationDbContext context) : base(context)
+        public RoleData(ApplicationDbContext context) : base(context)
         {
         }
 

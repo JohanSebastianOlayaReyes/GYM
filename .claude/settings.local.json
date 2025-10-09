@@ -17,7 +17,10 @@
       "Bash(dotnet add reference:*)",
       "Bash(dotnet add package:*)",
       "Bash(dotnet ef database update:*)",
-      "Bash(dotnet ef dbcontext:*)"
+      "Bash(dotnet ef dbcontext:*)",
+      "Bash(Select-String -Pattern \"error CS\" -Context 0,2)",
+      "Bash(dir:*)",
+      "Bash(findstr:*)"
     ],
     "deny": [],
     "ask": []

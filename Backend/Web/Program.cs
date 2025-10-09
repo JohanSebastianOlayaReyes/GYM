@@ -5,7 +5,6 @@ using Microsoft.IdentityModel.Tokens;
 
 using Entity.Context;
 using Data.Interfaces;
-using Data.Implements.RolData;
 using Data.Implements.RolUserData;
 using Data.Implements.UserDate;
 using Data.Implements.ServiceData;
@@ -27,6 +26,7 @@ using FluentValidation.AspNetCore;
 using Business.Services;
 using Data.Implements.BaseDate;
 using Data.Implements.BaseData;
+using Data.Implements.RolData;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -71,8 +71,8 @@ builder.Services.AddScoped<IUserData, UserData>();
 builder.Services.AddScoped<IUserBusiness, UserBusiness>();
 
 // Register Role-specific services
-builder.Services.AddScoped<IRolData, RolData>();
-builder.Services.AddScoped<IRolBusiness, RolBusiness>();
+builder.Services.AddScoped<IRolData, RoleData>();
+builder.Services.AddScoped<IRoleBusiness, RolBusiness>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtService, JwtService>();

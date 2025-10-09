@@ -185,11 +185,20 @@ namespace Web.Controllers
         {
             try
             {
-                updateDto.Id = id;
-                var result = await _membershipBusiness.UpdateAsync(updateDto);
+                var membershipDto = new MembershipDto
+                {
+                    Id = id,
+                    UserId = updateDto.UserId,
+                    Type = updateDto.Type,
+                    StartDate = updateDto.StartDate,
+                    EndDate = updateDto.EndDate,
+                    ServiceId = updateDto.ServiceId,
+                    Status = updateDto.Status
+                };
+                var result = await _membershipBusiness.UpdateAsync(membershipDto);
 
-                if (result)
-                    return Ok(new { success = true, message = "Membresía actualizada exitosamente" });
+                if (result != null)
+                    return Ok(new { success = true, message = "Membresía actualizada exitosamente", data = result });
 
                 return BadRequest(new { success = false, message = "No se pudo actualizar la membresía" });
             }
@@ -233,8 +242,7 @@ namespace Web.Controllers
         {
             try
             {
-                var deleteDto = new DeleteLogicalMembershipDto { Id = id, Status = false };
-                var result = await _membershipBusiness.DeleteAsync(deleteDto);
+                var result = await _membershipBusiness.DeleteAsync(id);
 
                 if (result)
                     return Ok(new { success = true, message = "Membresía eliminada exitosamente" });

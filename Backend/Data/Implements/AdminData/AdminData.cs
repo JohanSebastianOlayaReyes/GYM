@@ -41,5 +41,21 @@ namespace Data.Implements.AdminData
             return await _context.Admins
                 .AnyAsync(a => a.Email.ToLower() == email.ToLower());
         }
+
+        /// <summary>
+        /// Guarda un administrador en la base de datos de forma asíncrona.
+        /// </summary>
+        public async Task SaveAsync(Admin admin)
+        {
+            if (admin.Id == 0)
+            {
+                _context.Admins.Add(admin);
+            }
+            else
+            {
+                _context.Admins.Update(admin);
+            }
+            await _context.SaveChangesAsync();
+        }
     }
 }
